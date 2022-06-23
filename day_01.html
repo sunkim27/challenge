@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 1</title>
+  <style>
+    /* 조건 */
+    /* 1. 전체 너비 800px 전체 길이 300px
+       2. 선 두께 20px 원 지름 200px
+       3. 겹친 영역 80px
+       4. #FFF / #000 / #999
+
+       1. 유지보수가 용이한 구조로 만들기
+          - 원의 갯수가 바뀌더라도 행복하게 > display: flex 
+          - 원이 하나라도 가운데 정렬 유지 > display: flex 
+          - 전체 높이가 바뀌어도 세로 정렬 유지 > min-height 추가
+          - 선 두께를 바꿔도 행복하게 > box-sizing: border-box
+          - 겹친 영역이 늘거나 아예 겹치지 않도록 만들어도 최대한 적은 수정으로 구현되도록 설계 > 선만 그려진 div 요소나 가상요소 생성
+
+       2. 마크업은 최대한 단순한 상태를 유지 > 가상요소 사용
+     */
+
+    /* .container 가운데 정렬하기 */
+    /* #1. body 를 플렉스 박스로 만들어주기 */
+    /* #2. .container에 position 활용하기
+              (0) 공통: position:absolute; top:50%; left:50%
+              (1) transform 활용: transform: translate(-50%, -50%)
+              (2) margin 활용: margin-top: -[.container의 세로값 1/2]; margin-left: -[.container의 가로값 1/2]
+    */
+
+    /* .circle 가운데 정렬하기 - 이슈만 기록 */
+    /* inline-block과 text-align:center 를 쓸 경우, .circle 안에 텍스트가 없으면 정렬 틀어질 수 있음 (ㅇㅏ? 텍스트가 없으면...? 그럴 수도 있겠꾼...!) */
+
+    /* .circle 겹치기 */
+    /* .circle 에 네거티브 마진 사용하기: margin: 0 -40px */
+    /* 위 경우에 margin값은 조건의 1/2 값. 형제 선택자를 활용할 때는 조건값을 그대로 써야 한다. */
+
+    /* .circle이 겹칠 때 색깔과 선이 가려지지 않도록 하기 - 가상요소 활용의 경우 */
+    /* 가상요소는 inline 요소로 width, height 값을 가질 수 없다. 때문에 position을 사용하여 속성을 바꿔줘야 한다. */
+    /* position: static 만 아니라면 어떤 속성을 써도 상관 없지만 가상요소에 position: relative; display: block 를 주면 해결 가능하다. (positon: absolute는 z-index와 함께 가상요소에, 그 부모요소에는 position:relative를 주는 법보다 좋은 것 같기도? 코드도 한 줄 적고 한 선택자 안에서 제어 가능하니꽈) */
+    body {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+    }
+    .container {
+      /* position: absolute;
+      top: 50%;
+      left: 50%; */
+      /* transform: translate(-50%, -50%); */
+      /* margin-top: -150px;
+      margin-left: -400px; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 800px;
+      min-height: 300px;
+      background-color: #fff;
+    }
+    .circle + .circle {
+      margin-left: -80px;
+    }
+    .circle {
+      /* position: relative; */
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: #999;
+      /* margin: 0 -40px; */
+    }
+    .circle::before {
+      /* position: absolute; */
+      position: relative;
+      display: block;
+      border: 20px solid #000;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box; /* border 두께 만큼 크기가 커진다! reset 코드로 되는 게 아니니까 주의~ */
+      content: '';
+    }
+
+    /* 번외, 색칠된 요소와 선이 그려진 요소의 크기를 다르게 만드려면? relative-absolute 관계를 맺어주고 widht, height가 아닌 위치값을 활용해 크기 지정한 후 margin 값으로 여백을 조정한다*/
+
+    /* .circle {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: #999;
+    }
+
+    .circle::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: 20px;
+      border-radius: 50%;
+      border: 20px solid black;
+      z-index: 1;
+      content: '';
+    } */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+  </div>
+</body>
+</html>
