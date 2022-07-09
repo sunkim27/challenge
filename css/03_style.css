@@ -1,0 +1,198 @@
+@charset "utf-8";
+
+.blind{
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+}
+
+body{
+    background-color: #eee;
+}
+
+.box__review{
+    padding: 32px;
+}
+
+.box__review .box__inner{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+}
+
+.box__review .box__product-content{
+    padding: 16px;
+}
+
+.box__review .box__product-content .box__image{
+    display: inline-block;
+    overflow: hidden;
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    vertical-align: middle;
+}
+
+.box__review .box__product-content .box__image img{
+    width: 100%;
+    height: 100%;
+}
+
+.box__review .box__product-content .box__infomation{
+    display: inline-block;
+    width: 150px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.box__review .box__product-content .box__infomation .text__name{
+    overflow: hidden;
+    width: 100%;
+    color: #222;
+    font-size: 14px;
+}
+
+.box__review .box__product-content .box__infomation .text__option{
+    overflow: hidden;
+    width: 100%;
+    margin-top: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #666;
+}
+
+.box__review .box__review-content{
+    position: relative;
+    display: flex;
+    margin-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.box__review .box__review-content .list__simple-review{
+    padding: 16px 8px;
+}
+
+.box__review .box__review-content .list__simple-review .list-item{
+    display: flex;
+    margin-top: 6px;
+}
+
+.box__review .box__review-content .list__simple-review .list-item:first-child{
+    margin-top: 0;
+}
+
+.box__review .box__review-content .list__simple-review .list-item .text__simple-title{
+    display: block;
+    width: 120px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+}
+
+.box__review .box__review-content .list__simple-review .list-item .text__simple-info{
+    margin-left: 8px;
+    font-size: 14px;
+    color: #222;
+}
+
+.box__review .box__review-content .button__unfold{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.box__review .box__photo-content{
+    margin-top: 12px;
+}
+
+.box__review .box__photo-content .list__photo-review .list-item{
+    margin-top: 36px;
+}
+
+.box__review .box__photo-content .list__photo-review .list-item:first-child{
+    margin-top: 0;
+}
+
+.box__review .box__photo-content .list__photo-review .list-item .box__photo{
+    margin: auto;
+    overflow: hidden;
+    width: 125px;
+    height: auto;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.box__review .box__photo-content .list__photo-review .list-item .box__photo img{
+    width: 100%;
+    height: 100%;
+}
+
+.box__review .box__photo-content .list__photo-review .list-item .text__caption{
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+    color: #222;
+    line-height: 1.4;
+}
+
+/* fold */
+.box__review .box__photo-content.fold .list__photo-review{
+    position: relative;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item{
+    display: inline-block;
+    margin-top: 0;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item .box__photo{
+    position: absolute;
+    top: 0;
+    width: 125px;
+    height: 125px;
+    border-radius: 8px 8px 0 0;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item:nth-child(1) .box__photo{
+    left: 0;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item:nth-child(2) .box__photo{
+    right: 0;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item:nth-child(n+3){
+    display: none;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item .box__photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item .text__caption{
+    margin-top: 125px;
+    border-radius: 0 0 8px 8px
+}
+
+.box__review .box__photo-content.fold .list__photo-review .list-item:nth-child(n+2) .text__caption{
+    display: none;
+}
+
+
+.box__review .box__photo-content.fold .list__photo-review.single .list-item .box__photo{
+    width: 100%;
+    height: 125px;
+}
