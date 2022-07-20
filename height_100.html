@@ -5,8 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>생각처럼 동작하지 않는 height: 100%</title>
+    <style>
+        /* Old Solution : 최상위 요소 html height:100% 는 의도한대로 동작한다.
+        html, body{
+            height: 100%;
+        } */
+        body{
+            margin: 0;
+        }
+        .cover{
+            background-image:url('https://pixabay.com/get/g5f383cebc66232c8c7a4efcb921858225c56147369a265958451c9147cbbd5894a142da906f092858676f5a4a0999650d1389987f56974970aba3bc6dae0f4cd303c01b1ce8fc56a31e196476b76ecda_1920.jpg');
+            background-position: center;
+            background-size: cover;
+            /*  CSS default value
+            width: auto; 요소의 부모 크기 기준으로 가득찬다
+            height: auto; 요소의 자식 기준으로 자동 조절된다
+            */
+            height: 100%;
+            /* unit "%" : 부모 요소를 기준으로 설정됨.
+            그런데 부모요소인 body에는 height 값이 설정되지 않았으므로 default 값인 height:auto로 설정되어 있음. 따라서 body는 자식 기준으로 height값 조정됨 <-> .cover 는 body 기준으로 height:100%를 설정함.
+            => 서로가 서로를 기준으로 삼으면서 100% 가 의도대로 동작하지 않음!
+            */
+            height: 100vh; /* New Solution unit "vh" : 뷰포트 기준으로 설정됨 (지원 버전 확인 필수) */
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="cover">wow</div>
 </body>
 </html>
