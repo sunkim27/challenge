@@ -1,0 +1,145 @@
+/* #1~2 scss 소개 및 변수*/
+
+// 한줄주석 - 컴파일 X 
+/* 두줄주석 - 컴파일 O */
+
+// 변수명으로 사용 가능한 문자 - 영문/영문+숫자/영문+특수문자+숫자/대소문자
+$gray:#c9c9c9;
+$white:#fff;
+$blue:blue;
+$red:red;
+$fs30:30px;
+
+.btn1 {display: block;width: 200px;height: 50px;line-height: 50px;font-size: $fs30;color:$gray;background-color:$white;border: 1px solid $gray;text-align: center;
+    &:hover {background-color: $gray;color:$white;}
+}
+.btn2 {display: block;padding: 10px;font-size: $fs30;border: 1px solid $red;background-color: $blue;color: $gray;}
+
+/* #3 선택자 */
+// scss는 중첩 기능을 사용해 상위 선택자의 반보을 피하고 좀 더 편리하게 복잡한 구조를 작성할 수 있다
+// & - 상위 선택자를 참조하여 치환
+// @at-root - 중첩 안에서 생성하되 중첩 밖에서 사용해야 하는 경우에 사용
+.a{color: red;
+    ul{border: 1px solid red;
+        li{background: pink;
+            a{text-decoration: none;
+                &:hover{color: red;}
+                &.bbb{font-size: 20px;}
+            }
+            .bbb{font-weight: 700;}
+            &:last-child{border: 1px dotted yellowgreen;}
+        }
+    }
+}
+
+/* #4 mixin과 include */
+// 스타일시트 전체에서 재사용 할 CSS 선언 그룹을 정의하는 기능
+// 선언하기(@mixin) 포함하기(@include)
+div{margin: 20px 0;}
+@mixin test {
+    width:100px; height:100px; border: 1px solid red;
+}
+@mixin clear{
+    &:after {content: '';display: block;clear: both;}
+}
+.div{border: 3px solid blue;@include clear;}
+.div p{float:left;@include test}
+
+@mixin border($color){
+    border: 1px solid $color;
+}
+.div2{@include border(yellowgreen)}
+p{@include border(pink)}
+span{@include border(#000)}
+
+@mixin box($w, $h){
+    width: $w; height: $h;
+}
+.div3{@include box(300px, 400px);border: 1px solid #000;}
+
+/* #5 문자보간 */
+// #{}를 이용해 코드의 어디든지 변수 값을 넣을 수 있다.
+// $bx: box;
+// .#{$bx}{border: 1px solid red;}
+@mixin bx($position, $wid, $color){
+    border-#{$position}: $wid solid $color;
+}
+.box{@include bx(right, 2px, red)}
+p{@include bx(bottom, 5px, grey)}
+
+/* #6 @for 반복문 */
+// @for 1.through - 종료 만큼 반복
+// @for 2. to - 종료 직전까지 반복
+.list li{text-indent: 30px;background: no-repeat 0 0 / 20px auto}
+@for $i from 1 to 6{
+    .list li.ico#{$i} {background-image: url('../img/ico#{$i}.png');}
+    .list li:nth-child(#{$i}):before {content: '제목#{$i}';}
+}
+
+/* #7 @each 반복문 */
+@each $var in dribbble, facebook, twitter{
+    .ico_#{$var}{
+        background: url(../img/#{$var}.png) no-repeat;
+    }
+}
+
+$heading: (
+    h1:30px,
+    h2:20px,
+    h3:15px,
+);
+
+@each $ele, $fz in $heading {
+    #{$ele} {
+        font-size: $fz;
+    }
+}
+
+/* #8 @extend */
+// 특정 선택자가 다른 선택자의 모든 스타일을 가져야하는 경우 사용
+// 컴파일하면 , 를 사용하는 다중 선택자가 만들어짐
+// 확장(extend)에는 위험성이 있기 때문에 이보다는 mixin이 더 안전한 대체 기능으로 사용 가능함
+%name {font-size: 14px;color: blue;}
+.fz20 {font-size: 20px;}
+@mixin name($bold, $color){font-weight: $bold;background-color: $color;}
+
+.a{@extend %name; @include name(bold, grey);}
+.b{@extend .fz20;}
+.c{@extend %name;}
+
+// 아래와 같은 경우에는 @extend를 쓰기 괜찮을지도...?
+%m0auto{width: 1200px;margin: 0 auto;}
+.visual{background-color: pink; height: 300px;
+    .extend_ex{@extend %m0auto; background-color: rgba(0,0,0,.5);height: 300px;}
+}
+.main{background-color: purple; height: 500px;
+    .extend_ex{@extend %m0auto; background-color: rgba(0,0,0,0.5);height: 500px;}
+}
+.footer{background-color: violet; height: 150px;
+    .extend_ex{@extend %m0auto; background-color: rgba(0,0,0,0.5);height: 150px;}
+}
+
+/* #9 조건문 */
+// if (함수) - 조건의 값(true, false)에 따라 두 개의 표현식 중 하나만 반환
+// if (지시어) - 조건에 따라 분기 처리 가능
+// 조건에는 논리 연산자 and, or , not 사용 가능
+@mixin btn_radius($h, $radius:true){padding: 0 20px; height: $h;text-align: center;background-color: orange;
+    @if $radius {
+        border-radius: $h / 2;
+    }@else {
+        border: 1px solid #000;
+    }
+}
+.btn {@include btn_radius(30px, false)}
+
+@mixin position($x, $y, $z){position: absolute;left: $x;top: $y;z-index: $z;
+    @if $x == 50% and $y == 50% {
+        transform: translate(-50%, -50%);
+    }@else if $x == 50%{
+        transform: translateX(-50%);
+    }@else if $y == 50%{
+        transform: translateY(-50%);
+    }
+}
+
+.conditional{width: 300px;height: 300px;background-color: #000;@include position(null, 50%, 2)}

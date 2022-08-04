@@ -1,0 +1,238 @@
+@charset "UTF-8";
+/* #1~2 scss 소개 및 변수*/
+/* 두줄주석 - 컴파일 O */
+.btn1 {
+  display: block;
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  color: #c9c9c9;
+  background-color: #fff;
+  border: 1px solid #c9c9c9;
+  text-align: center;
+}
+.btn1:hover {
+  background-color: #c9c9c9;
+  color: #fff;
+}
+
+.btn2 {
+  display: block;
+  padding: 10px;
+  font-size: 30px;
+  border: 1px solid red;
+  background-color: blue;
+  color: #c9c9c9;
+}
+
+/* #3 선택자 */
+.a {
+  color: red;
+}
+.a ul {
+  border: 1px solid red;
+}
+.a ul li {
+  background: pink;
+}
+.a ul li a {
+  text-decoration: none;
+}
+.a ul li a:hover {
+  color: red;
+}
+.a ul li a.bbb {
+  font-size: 20px;
+}
+.a ul li .bbb {
+  font-weight: 700;
+}
+.a ul li:last-child {
+  border: 1px dotted yellowgreen;
+}
+
+/* #4 mixin과 include */
+div {
+  margin: 20px 0;
+}
+
+.div {
+  border: 3px solid blue;
+}
+.div:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.div p {
+  float: left;
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+}
+
+.div2 {
+  border: 1px solid yellowgreen;
+}
+
+p {
+  border: 1px solid pink;
+}
+
+span {
+  border: 1px solid #000;
+}
+
+.div3 {
+  width: 300px;
+  height: 400px;
+  border: 1px solid #000;
+}
+
+/* #5 문자보간 */
+.box {
+  border-right: 2px solid red;
+}
+
+p {
+  border-bottom: 5px solid grey;
+}
+
+/* #6 @for 반복문 */
+.list li {
+  text-indent: 30px;
+  background: no-repeat 0 0/20px auto;
+}
+
+.list li.ico1 {
+  background-image: url("../img/ico1.png");
+}
+
+.list li:nth-child(1):before {
+  content: "제목1";
+}
+
+.list li.ico2 {
+  background-image: url("../img/ico2.png");
+}
+
+.list li:nth-child(2):before {
+  content: "제목2";
+}
+
+.list li.ico3 {
+  background-image: url("../img/ico3.png");
+}
+
+.list li:nth-child(3):before {
+  content: "제목3";
+}
+
+.list li.ico4 {
+  background-image: url("../img/ico4.png");
+}
+
+.list li:nth-child(4):before {
+  content: "제목4";
+}
+
+.list li.ico5 {
+  background-image: url("../img/ico5.png");
+}
+
+.list li:nth-child(5):before {
+  content: "제목5";
+}
+
+/* #7 @each 반복문 */
+.ico_dribbble {
+  background: url(../img/dribbble.png) no-repeat;
+}
+
+.ico_facebook {
+  background: url(../img/facebook.png) no-repeat;
+}
+
+.ico_twitter {
+  background: url(../img/twitter.png) no-repeat;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 15px;
+}
+
+/* #8 @extend */
+.c, .a {
+  font-size: 14px;
+  color: blue;
+}
+
+.fz20, .b {
+  font-size: 20px;
+}
+
+.a {
+  font-weight: bold;
+  background-color: grey;
+}
+
+.footer .extend_ex, .main .extend_ex, .visual .extend_ex {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.visual {
+  background-color: pink;
+  height: 300px;
+}
+.visual .extend_ex {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 300px;
+}
+
+.main {
+  background-color: purple;
+  height: 500px;
+}
+.main .extend_ex {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 500px;
+}
+
+.footer {
+  background-color: violet;
+  height: 150px;
+}
+.footer .extend_ex {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 150px;
+}
+
+/* #9 조건문 */
+.btn {
+  padding: 0 20px;
+  height: 30px;
+  text-align: center;
+  background-color: orange;
+  border: 1px solid #000;
+}
+
+.conditional {
+  width: 300px;
+  height: 300px;
+  background-color: #000;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+}/*# sourceMappingURL=stylestyle.css.map */
